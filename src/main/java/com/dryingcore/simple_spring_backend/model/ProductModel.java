@@ -1,5 +1,6 @@
 package com.dryingcore.simple_spring_backend.model;
 
+import com.dryingcore.simple_spring_backend.entity.ProductEntity;
 import lombok.*;
 
 /**
@@ -70,5 +71,31 @@ public class ProductModel {
         this.id = id;
         setProductName(productName);
         setPrice(price);
+    }
+
+    /**
+    * Constructs a ProductModel from an entity
+    *
+    * @param productEntity The entity which will originate a new model
+    * @return A model created from an entity
+     */
+    public static ProductModel fromEntity(ProductEntity productEntity) {
+        return new ProductModel(
+                productEntity.getId(),
+                productEntity.getProductName(),
+                productEntity.getPrice());
+    }
+
+    /**
+     * Create a new Entity based on a model
+     *
+     * @return An entity created from a ProductModel
+     */
+    public ProductEntity toEntity() {
+        ProductEntity entity = new ProductEntity();
+        entity.setId(this.id);
+        entity.setProductName(this.productName);
+        entity.setPrice(this.price);
+        return entity;
     }
 }
