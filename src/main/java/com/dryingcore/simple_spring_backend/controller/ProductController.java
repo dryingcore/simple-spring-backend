@@ -17,13 +17,24 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @GetMapping("/")
+    public String rootPath() {
+        return "Hello, world!";
+    }
+
     @GetMapping("/get_products")
     public List<ProductModel> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @GetMapping("/get_products/{id}")
+    public ProductModel getProductById(@PathVariable("id") long id) {
+        return productService.getProductById(id);
     }
 
     @PostMapping("/add_product")
     public ProductModel addNewProduct(@RequestBody ProductModel productModel) {
         return productService.saveProductToDatabase(productModel);
     }
+
 }
